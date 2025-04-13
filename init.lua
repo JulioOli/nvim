@@ -22,6 +22,15 @@ require("lazy").setup({
     import = "nvchad.plugins",
   },
 
+  {
+    "Mofiqul/dracula.nvim",
+    lazy = false, -- Carrega imediatamente
+    priority = 1000, -- Prioridade alta para evitar flicker
+    config = function()
+      vim.cmd.colorscheme("dracula") -- Aplica o tema
+    end,
+  },
+
   { import = "plugins" },
 }, lazy_config)
 
