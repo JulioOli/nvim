@@ -1,3 +1,4 @@
+
 use {
   "Mofiqul/dracula.nvim",
   config = function()
