@@ -16,11 +16,15 @@ local lazy_config = require "configs.lazy"
 -- load plugins
 require("lazy").setup({
   {
-    "NvChad/NvChad",
-    lazy = false,
-    branch = "v2.5",
-    import = "nvchad.plugins",
-  },
+  "NvChad/NvChad",
+  lazy = false,
+  branch = "v2.5",
+  import = "nvchad.plugins",
+  config = function()
+    -- Desativa o tema padrão do NvChad
+    vim.g.nvchad_theme = nil
+  end,
+},
 
   {
     "Mofiqul/dracula.nvim",
