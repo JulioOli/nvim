@@ -1,8 +1,14 @@
 -- Define o caminho do Python provider
 local python_path = vim.fn.expand("~/.config/nvim/venv/bin/python3")
-vim.g.python3_host_prog = python_path
+if vim.fn.filereadable(python_path) == 1 then
+    vim.g.python3_host_prog = python_path
+    print("Python path set to: " .. python_path)
+else
+    print("⚠️ Python path not found: " .. python_path)
+end
 
-print("Python path set to: " .. python_path)
+-- Configuração para sair do modo de terminal com <Esc>
+vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
 
 return {
   {
@@ -11,7 +17,6 @@ return {
     opts = require "configs.conform",
   },
 
-  -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
     config = function()
