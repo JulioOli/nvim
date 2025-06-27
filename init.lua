@@ -1,3 +1,5 @@
+-- ~/.config/nvim/init.lua
+
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
 
@@ -16,15 +18,15 @@ local lazy_config = require "configs.lazy"
 -- load plugins
 require("lazy").setup({
   {
-  "NvChad/NvChad",
-  lazy = false,
-  branch = "v2.5",
-  import = "nvchad.plugins",
-  config = function()
-    -- Desativa o tema padrão do NvChad
-    vim.g.nvchad_theme = nil
-  end,
-},
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+    config = function()
+      -- Desativa o tema padrão do NvChad
+      vim.g.nvchad_theme = nil
+    end,
+  },
 
   {
     "Mofiqul/dracula.nvim",
@@ -45,6 +47,7 @@ dofile(vim.g.base46_cache .. "statusline")
 require "options"
 require "nvchad.autocmds"
 
+-- Carrega os mapeamentos de teclas de forma segura
 vim.schedule(function()
   require "mappings"
 end)

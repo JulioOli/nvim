@@ -1,36 +1,28 @@
--- Define o caminho do Python provider
-local python_path = vim.fn.expand("~/.config/nvim/venv/bin/python3")
-if vim.fn.filereadable(python_path) == 1 then
-    vim.g.python3_host_prog = python_path
-    print("Python path set to: " .. python_path)
-else
-    print("⚠️ Python path not found: " .. python_path)
+-- Configuração mínima do lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
--- Configuração para sair do modo de terminal com <Esc>
-vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
-
-return {
+-- Configuração DIRETA do Harpoon
+require("lazy").setup({
   {
-    "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
-    opts = require "configs.conform",
-  },
-
-  {
-    "neovim/nvim-lspconfig",
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require "configs.lspconfig"
+      require("harpoon").setup()
+      -- Mapeamentos básicos
+      vim.keymap.set("n", "<leader>a", function() require("harpoon"):list():append() end)
+      vim.keymap.set("n", "<leader>h", function() require("harpoon.ui").toggle_quick_menu() end)
     end,
-  },
-
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
-}
+  }
+})
