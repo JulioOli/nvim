@@ -10,6 +10,7 @@ return {
         ensure_installed = {
           "lua", "vim", "vimdoc", "python", "javascript", "typescript",
           "html", "css", "json", "bash", "markdown", "markdown_inline",
+          "java", "c", "cpp",
         },
         
         -- Instalar parsers de forma síncrona (aplica-se apenas a `ensure_installed`)
