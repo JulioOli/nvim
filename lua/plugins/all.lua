@@ -16,5 +16,6 @@ add_plugins("plugins.lsp")
 add_plugins("plugins.copilot")
 add_plugins("plugins.completion")
 add_plugins("plugins.treesitter")
+add_plugins("plugins.undotree")
 
 return plugins
