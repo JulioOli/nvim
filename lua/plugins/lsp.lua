@@ -38,6 +38,7 @@ return {
         'cssls',     -- CSS
         'jsonls',    -- JSON
         'bashls',    -- Bash
+        'jdtls',     -- Java
       },
       automatic_installation = true,
     },
@@ -86,6 +87,54 @@ return {
       lspconfig.cssls.setup({})
       lspconfig.jsonls.setup({})
       lspconfig.bashls.setup({})
+      
+      -- Configuração específica para Java (jdtls)
+      lspconfig.jdtls.setup({
+        settings = {
+          java = {
+            signatureHelp = { enabled = true },
+            contentProvider = { preferred = 'fernflower' },  -- decompiler
+            completion = {
+              favoriteStaticMembers = {
+                "org.junit.Assert.*",
+                "org.junit.Assume.*",
+                "org.junit.jupiter.api.Assertions.*",
+                "org.junit.jupiter.api.Assumptions.*",
+                "org.junit.jupiter.api.DynamicContainer.*",
+                "org.junit.jupiter.api.DynamicTest.*",
+                "org.mockito.Mockito.*",
+                "org.mockito.ArgumentMatchers.*",
+              },
+            },
+            sources = {
+              organizeImports = {
+                starThreshold = 9999,
+                staticStarThreshold = 9999,
+              },
+            },
+            codeGeneration = {
+              toString = {
+                template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+              },
+              hashCodeEquals = {
+                useJava7Objects = true,
+              },
+            },
+            configuration = {
+              runtimes = {
+                {
+                  name = "JavaSE-11",
+                  path = "/usr/lib/jvm/java-11-openjdk/",
+                },
+                {
+                  name = "JavaSE-17",
+                  path = "/usr/lib/jvm/java-17-openjdk/",
+                },
+              },
+            },
+          },
+        },
+      })
     end,
   },
 }
