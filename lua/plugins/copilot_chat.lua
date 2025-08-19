@@ -20,7 +20,7 @@ return {
           padding_top = 1,
           border = "rounded",
           title = "GitHub Copilot Chat",
-          footer = "Press <C-c> to close, <C-u> to scroll up, <C-d> to scroll down",
+          footer = "Press <Enter> to submit, <C-c> to close, <C-u> to scroll up, <C-d> to scroll down",
         },
         mappings = {
           -- Adicione atalhos úteis
@@ -35,8 +35,8 @@ return {
             normal = "<C-l>",
           },
           submit_prompt = {
-            insert = "<C-s>",
-            normal = "<C-s>",
+            insert = "<CR>",  -- Enter no modo de inserção
+            normal = "<CR>",  -- Enter no modo normal
           },
           accept_diff = {
             insert = "<C-y>",
