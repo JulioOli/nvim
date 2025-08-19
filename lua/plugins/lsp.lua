@@ -33,7 +33,7 @@ return {
       ensure_installed = {
         'lua_ls',    -- Lua
         'pyright',   -- Python
-        'tsserver',  -- TypeScript/JavaScript
+        'typescript-language-server',  -- TypeScript/JavaScript (nome correto)
         'html',      -- HTML
         'cssls',     -- CSS
         'jsonls',    -- JSON
@@ -82,7 +82,7 @@ return {
 
       -- Configure outros servidores
       lspconfig.pyright.setup({})
-      lspconfig.tsserver.setup({})
+      lspconfig.tsserver.setup({})  -- Manteremos isso por compatibilidade, mas o nome correto é typescript-language-server
       lspconfig.html.setup({})
       lspconfig.cssls.setup({})
       lspconfig.jsonls.setup({})
@@ -123,12 +123,8 @@ return {
             configuration = {
               runtimes = {
                 {
-                  name = "JavaSE-11",
-                  path = "/usr/lib/jvm/java-11-openjdk/",
-                },
-                {
-                  name = "JavaSE-17",
-                  path = "/usr/lib/jvm/java-17-openjdk/",
+                  name = "JavaSE-21",
+                  path = "/usr/lib/jvm/java-21-openjdk-amd64/",  -- Caminho ajustado para o Java 21
                 },
               },
             },
