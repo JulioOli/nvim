@@ -1,6 +1,10 @@
 
 return {
   {
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = { "java" },
+  },
     'VonHeikemen/lsp-zero.nvim', 
     branch = 'v3.x',
     lazy = true,
@@ -29,19 +33,27 @@ return {
   {
     'williamboman/mason-lspconfig.nvim',
     lazy = false,
-    opts = {
-      ensure_installed = {
-        'lua_ls',    -- Lua
-        'pyright',   -- Python
-        'typescript-language-server',  -- TypeScript/JavaScript (nome correto)
-        'html',      -- HTML
-        'cssls',     -- CSS
-        'jsonls',    -- JSON
-        'bashls',    -- Bash
-        'jdtls',     -- Java
-      },
-      automatic_installation = true,
-    },
+    config = function()
+      -- Usamos config em vez de opts para ter mais controle
+      require('mason-lspconfig').setup({
+        -- Usamos os nomes do lspconfig para ensure_installed
+        ensure_installed = {
+          'lua_ls',    -- Lua
+          'pyright',   -- Python
+          'tsserver',  -- TypeScript
+          'html',      -- HTML
+          'cssls',     -- CSS
+          'jsonls',    -- JSON
+          'bashls',    -- Bash
+          'jdtls',     -- Java
+          'clangd',    -- C/C++
+        },
+        automatic_installation = true,
+      })
+      
+      -- Instalamos os pacotes diretamente via Mason
+      vim.cmd([[MasonInstall lua-language-server pyright typescript-language-server html-lsp css-lsp json-lsp bash-language-server jdtls clangd]])
+    end,
   },
   {
     'neovim/nvim-lspconfig',
@@ -87,6 +99,9 @@ return {
       lspconfig.cssls.setup({})
       lspconfig.jsonls.setup({})
       lspconfig.bashls.setup({})
+      
+      -- Configuração para C/C++ (clangd)
+      require('configs.clangd').setup()
       
       -- Configuração específica para Java (jdtls)
       lspconfig.jdtls.setup({
