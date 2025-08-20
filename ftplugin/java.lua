@@ -21,8 +21,9 @@ end
 -- Inicia o servidor JDTLS com configurações adequadas
 local ok, jdtls = pcall(require, 'jdtls')
 if not ok then
-  vim.notify("JDTLS não está instalado. Instalando via Mason...", vim.log.levels.WARN)
-  vim.cmd("MasonInstall jdtls")
+  vim.notify("JDTLS não está instalado. Use :MasonInstall jdtls para instalá-lo.", vim.log.levels.WARN)
+  -- Removemos a instalação automática para evitar que o Mason abra
+  -- vim.cmd("MasonInstall jdtls")
   return
 end
 

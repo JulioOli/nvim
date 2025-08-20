@@ -1,10 +1,6 @@
 
 return {
   {
-  {
-    "mfussenegger/nvim-jdtls",
-    ft = { "java" },
-  },
     'VonHeikemen/lsp-zero.nvim', 
     branch = 'v3.x',
     lazy = true,
@@ -17,7 +13,7 @@ return {
   },
   {
     'williamboman/mason.nvim',
-    lazy = true, -- Mudamos para lazy=true para evitar que carregue no início
+    lazy = false,
     config = function()
       require('mason').setup({
         ui = {
@@ -25,26 +21,34 @@ return {
             package_installed = "✓",
             package_pending = "➜",
             package_uninstalled = "✗"
-          },
-          check_outdated_packages_on_open = false -- Não verifica atualizações ao abrir
+          }
         }
       })
     end,
   },
   {
     'williamboman/mason-lspconfig.nvim',
-    lazy = true, -- Mudamos para lazy=true para carregar sob demanda
+    lazy = false,
     config = function()
       -- Usamos config em vez de opts para ter mais controle
       require('mason-lspconfig').setup({
         -- Usamos os nomes do lspconfig para ensure_installed
-        -- Não instalamos automaticamente, apenas quando necessário
-        ensure_installed = {},
-        automatic_installation = false, -- Desabilita instalação automática
+        ensure_installed = {
+          'lua_ls',    -- Lua
+          'pyright',   -- Python
+          'tsserver',  -- TypeScript
+          'html',      -- HTML
+          'cssls',     -- CSS
+          'jsonls',    -- JSON
+          'bashls',    -- Bash
+          'jdtls',     -- Java
+          'clangd',    -- C/C++
+        },
+        automatic_installation = true,
       })
       
-      -- Não abrimos o Mason automaticamente, apenas verificamos os servidores
-      -- Os servidores necessários serão instalados silenciosamente quando necessário
+      -- Instalamos os pacotes diretamente via Mason
+      vim.cmd([[MasonInstall lua-language-server pyright typescript-language-server html-lsp css-lsp json-lsp bash-language-server jdtls clangd]])
     end,
   },
   {

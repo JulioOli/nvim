@@ -1,0 +1,16 @@
+{
+    "java.project.sourcePaths": ["", "controller", "model", "view"],
+    "java.project.outputPath": "bin",
+    "java.format.settings.url": "eclipse-formatter.xml",
+    "java.format.settings.profile": "Eclipse [built-in]",
+    "java.completion.importOrder": [
+        "java",
+        "javax",
+        "com",
+        "org",
+        "model",
+        "view",
+        "controller"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

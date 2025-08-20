@@ -17,5 +17,6 @@ add_plugins("plugins.copilot")
 add_plugins("plugins.completion")
 add_plugins("plugins.treesitter")
 add_plugins("plugins.undotree")
+add_plugins("plugins.java")
 
 return plugins
